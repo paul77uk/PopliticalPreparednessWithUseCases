@@ -1,0 +1,17 @@
+{
+  "elections": [
+    {
+      "id": "2000",
+      "name": "VIP Test Election",
+      "electionDay": "2025-06-06",
+      "ocdDivisionId": "ocd-division/country:us"
+    },
+    {
+      "id": "7064",
+      "name": "Open General / Orleans Municipal Parochial Primary",
+      "electionDay": "2021-11-13",
+      "ocdDivisionId": "ocd-division/country:us/state:la"
+    }
+  ],
+  "kind": "civicinfo#electionsQueryResponse"
+}
