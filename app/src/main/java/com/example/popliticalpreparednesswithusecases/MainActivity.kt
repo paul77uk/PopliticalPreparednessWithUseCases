@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import com.example.popliticalpreparednesswithusecases.presentation.adapters.ElectionAdapter
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModel
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,8 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: ElectionViewModelFactory
+    @Inject
+    lateinit var electionAdapter: ElectionAdapter
     lateinit var viewModel: ElectionViewModel
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {

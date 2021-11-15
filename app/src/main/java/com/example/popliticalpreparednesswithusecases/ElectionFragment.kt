@@ -30,6 +30,7 @@ class ElectionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentElectionBinding = FragmentElectionBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
+        electionAdapter = (activity as MainActivity).electionAdapter
         initRecycleView()
         viewElectionList()
     }
@@ -58,7 +59,7 @@ class ElectionFragment : Fragment() {
     }
 
     private fun initRecycleView() {
-        electionAdapter = ElectionAdapter()
+//        electionAdapter = ElectionAdapter()
         fragmentElectionBinding.upcomingElectionsRecyclerView.apply {
             adapter = electionAdapter
             layoutManager = LinearLayoutManager(activity)
