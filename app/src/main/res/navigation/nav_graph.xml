@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/electionFragment"
         android:name="com.example.popliticalpreparednesswithusecases.ElectionFragment"
-        android:label="fragment_election"
-        tools:layout="@layout/fragment_election" >
+        android:label="Political Preparedness"
+        tools:layout="@layout/fragment_election">
         <action
             android:id="@+id/action_electionFragment_to_voterInfoFragment"
             app:destination="@id/voterInfoFragment" />
@@ -17,12 +17,13 @@
     <fragment
         android:id="@+id/voterInfoFragment"
         android:name="com.example.popliticalpreparednesswithusecases.VoterInfoFragment"
-        android:label="fragment_voter_info"
+        android:label="Political Preparedness"
+
         tools:layout="@layout/fragment_voter_info" />
     <fragment
         android:id="@+id/launchFragment"
         android:name="com.example.popliticalpreparednesswithusecases.LaunchFragment"
-        android:label="LaunchFragment" >
+        android:label="Political Preparedness">
         <action
             android:id="@+id/action_launchFragment_to_electionFragment"
             app:destination="@id/electionFragment" />

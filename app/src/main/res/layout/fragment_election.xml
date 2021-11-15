@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".ElectionFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="elections fragment" />
+        android:visibility="gone" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/upcoming_elections_text_view"
+        style="@style/header_texts"
+        android:text="@string/upcoming_elections" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/upcoming_elections_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/saved_elections_text_view"
+        style="@style/header_texts"
+        android:text="@string/saved_elections" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/saved_elections_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
