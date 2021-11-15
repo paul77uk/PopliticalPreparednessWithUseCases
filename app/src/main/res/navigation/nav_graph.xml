@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/launchFragment">
+
+    <fragment
+        android:id="@+id/electionFragment"
+        android:name="com.example.popliticalpreparednesswithusecases.ElectionFragment"
+        android:label="fragment_election"
+        tools:layout="@layout/fragment_election" >
+        <action
+            android:id="@+id/action_electionFragment_to_voterInfoFragment"
+            app:destination="@id/voterInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/voterInfoFragment"
+        android:name="com.example.popliticalpreparednesswithusecases.VoterInfoFragment"
+        android:label="fragment_voter_info"
+        tools:layout="@layout/fragment_voter_info" />
+    <fragment
+        android:id="@+id/launchFragment"
+        android:name="com.example.popliticalpreparednesswithusecases.LaunchFragment"
+        android:label="LaunchFragment" >
+        <action
+            android:id="@+id/action_launchFragment_to_electionFragment"
+            app:destination="@id/electionFragment" />
+    </fragment>
+</navigation>
