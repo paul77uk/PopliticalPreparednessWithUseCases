@@ -19,7 +19,11 @@
         android:name="com.example.popliticalpreparednesswithusecases.VoterInfoFragment"
         android:label="Political Preparedness"
 
-        tools:layout="@layout/fragment_voter_info" />
+        tools:layout="@layout/fragment_voter_info" >
+        <argument
+            android:name="selected_election"
+            app:argType="com.example.popliticalpreparednesswithusecases.data.model.Election" />
+    </fragment>
     <fragment
         android:id="@+id/launchFragment"
         android:name="com.example.popliticalpreparednesswithusecases.LaunchFragment"

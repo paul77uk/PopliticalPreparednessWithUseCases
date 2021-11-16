@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
 import com.example.popliticalpreparednesswithusecases.databinding.FragmentElectionBinding
@@ -31,6 +32,15 @@ class ElectionFragment : Fragment() {
         fragmentElectionBinding = FragmentElectionBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
         electionAdapter = (activity as MainActivity).electionAdapter
+        electionAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("selected_election", it)
+            }
+            findNavController().navigate(
+                R.id.action_electionFragment_to_voterInfoFragment,
+                bundle
+            )
+        }
         initRecycleView()
         viewElectionList()
     }

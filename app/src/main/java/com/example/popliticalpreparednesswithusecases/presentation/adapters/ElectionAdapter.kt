@@ -45,7 +45,20 @@ class ElectionAdapter : RecyclerView.Adapter<ElectionAdapter.ElectionViewHolder>
         fun bind(election: Election) {
             binding.electionNameTextView.text = election.name
             binding.electionDayTextView.text = election.electionDay
+
+            binding.root.setOnClickListener {
+                onItemClickListener?.let {
+                    it(election)
+                }
+            }
         }
+
+    }
+
+    private var onItemClickListener: ((Election) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Election) -> Unit) {
+        onItemClickListener = listener
     }
 
 }

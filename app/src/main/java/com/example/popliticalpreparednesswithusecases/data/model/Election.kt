@@ -2,6 +2,7 @@ package com.example.popliticalpreparednesswithusecases.data.model
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Election(
     @SerializedName("electionDay")
@@ -12,4 +13,4 @@ data class Election(
     val name: String,
     @SerializedName("ocdDivisionId")
     val ocdDivisionId: String
-)
+) : Serializable
