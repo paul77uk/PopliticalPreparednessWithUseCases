@@ -1,8 +1,10 @@
 package com.example.popliticalpreparednesswithusecases.presentation.di
 
 import android.app.Application
+import com.example.popliticalpreparednesswithusecases.domain.usecase.GetSearchedRepresentativeUseCase
 import com.example.popliticalpreparednesswithusecases.domain.usecase.GetUpcomingElectionsUseCase
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModelFactory
+import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.RepresentativeViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,6 +24,18 @@ class FactoryModule {
         return ElectionViewModelFactory(
             application,
             getUpcomingElectionsUseCase
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideRepresentativeViewModelFactory(
+        application: Application,
+        getSearchedRepresentativeUseCase: GetSearchedRepresentativeUseCase
+    ): RepresentativeViewModelFactory {
+        return RepresentativeViewModelFactory(
+            application,
+            getSearchedRepresentativeUseCase
         )
     }
 

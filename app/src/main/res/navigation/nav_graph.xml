@@ -31,5 +31,13 @@
         <action
             android:id="@+id/action_launchFragment_to_electionFragment"
             app:destination="@id/electionFragment" />
+        <action
+            android:id="@+id/action_launchFragment_to_representativeFragment"
+            app:destination="@id/representativeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/representativeFragment"
+        android:name="com.example.popliticalpreparednesswithusecases.RepresentativeFragment"
+        android:label="representative_fragment"
+        tools:layout="@layout/representative_fragment" />
 </navigation>

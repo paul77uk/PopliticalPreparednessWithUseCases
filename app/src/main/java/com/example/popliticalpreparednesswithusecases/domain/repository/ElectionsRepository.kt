@@ -2,6 +2,8 @@ package com.example.popliticalpreparednesswithusecases.domain.repository
 
 import com.example.popliticalpreparednesswithusecases.data.model.Election
 import com.example.popliticalpreparednesswithusecases.data.model.ElectionResponse
+import com.example.popliticalpreparednesswithusecases.data.model.RepresentativeResponse
+import com.example.popliticalpreparednesswithusecases.data.model.VoterInfoResponse
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
 import kotlinx.coroutines.flow.Flow
 

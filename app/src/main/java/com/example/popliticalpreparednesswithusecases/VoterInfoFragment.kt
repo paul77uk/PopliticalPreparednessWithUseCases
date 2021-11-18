@@ -25,8 +25,8 @@ class VoterInfoFragment : Fragment() {
         fragmentVoterInfoBinding = FragmentVoterInfoBinding.bind(view)
         val args: VoterInfoFragmentArgs by navArgs()
         val election = args.selectedElection
-        if (election.electionDay != "") fragmentVoterInfoBinding.infoFragmentTextView.text =
-            election.electionDay
+        if (election.id != "") fragmentVoterInfoBinding.infoFragmentTextView.text =
+            election.id
     }
 
 }
