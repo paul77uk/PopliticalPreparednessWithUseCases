@@ -1,6 +1,7 @@
 package com.example.popliticalpreparednesswithusecases.presentation.di
 
 import com.example.popliticalpreparednesswithusecases.presentation.adapters.ElectionAdapter
+import com.example.popliticalpreparednesswithusecases.presentation.adapters.RepresentativeAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +16,12 @@ class AdapterModule {
     @Provides
     fun provideElectionAdapter(): ElectionAdapter {
         return ElectionAdapter()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRepresentativeAdapter(): RepresentativeAdapter {
+        return RepresentativeAdapter()
     }
 
 }

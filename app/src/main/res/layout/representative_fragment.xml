@@ -5,51 +5,110 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".RepresentativeFragment">
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+    <TextView
+        android:id="@+id/respresentative_search_title_text_view"
+        style="@style/header_texts"
+        android:text="@string/representative_search_header_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Hello"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
-
-    <SearchView
-        android:id="@+id/search_view"
+    <EditText
+        android:id="@+id/address_line_1_edit_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:hint="@string/address_line_1_hint"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/respresentative_search_title_text_view" />
+
+    <EditText
+        android:id="@+id/address_line_2_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/address_line_2_hint"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" >
+        app:layout_constraintTop_toBottomOf="@+id/address_line_1_edit_text" />
 
-    </SearchView>
+    <EditText
+        android:id="@+id/city_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:hint="City"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/state_edit_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/address_line_2_edit_text" />
+
+    <EditText
+        android:id="@+id/state_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="State"
+        app:layout_constraintBottom_toBottomOf="@+id/city_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/city_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/address_line_2_edit_text" />
+
+    <EditText
+        android:id="@+id/zip_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/zip_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/city_edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city_edit_text" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Find My Representative"
+        android:text="Find My Representatives"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_view" />
+        app:layout_constraintTop_toBottomOf="@+id/zip_edit_text" />
+
+    <Button
+        android:id="@+id/use_my_location_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Use My Location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/my_representative_header_text_view"
+        style="@style/header_texts"
+        android:layout_marginTop="8dp"
+        android:text="My Representatives"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/use_my_location_button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/representatives_recycler_view"
+        android:layout_width="409dp"
+        android:layout_height="380dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_representative_header_text_view" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
