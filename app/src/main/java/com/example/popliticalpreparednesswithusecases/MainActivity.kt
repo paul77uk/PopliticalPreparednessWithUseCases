@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var representativeFactory: RepresentativeViewModelFactory
     @Inject
     lateinit var electionAdapter: ElectionAdapter
+    @Inject
     lateinit var representativeAdapter: RepresentativeAdapter
     lateinit var viewModel: ElectionViewModel
     lateinit var representativeViewModel: RepresentativeViewModel

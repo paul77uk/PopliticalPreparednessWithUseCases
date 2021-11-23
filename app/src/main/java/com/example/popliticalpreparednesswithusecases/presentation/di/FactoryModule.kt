@@ -1,8 +1,7 @@
 package com.example.popliticalpreparednesswithusecases.presentation.di
 
 import android.app.Application
-import com.example.popliticalpreparednesswithusecases.domain.usecase.GetSearchedRepresentativeUseCase
-import com.example.popliticalpreparednesswithusecases.domain.usecase.GetUpcomingElectionsUseCase
+import com.example.popliticalpreparednesswithusecases.domain.usecase.*
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModelFactory
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.RepresentativeViewModelFactory
 import dagger.Module
@@ -19,11 +18,17 @@ class FactoryModule {
     @Provides
     fun provideElectionViewModelFactory(
         application: Application,
-        getUpcomingElectionsUseCase: GetUpcomingElectionsUseCase
+        getUpcomingElectionsUseCase: GetUpcomingElectionsUseCase,
+        saveElectionUseCase: SaveElectionUseCase,
+        getSavedElectionUseCase: GetSavedElectionUseCase,
+        unfollowElectionUseCase: UnfollowElectionUseCase
     ): ElectionViewModelFactory {
         return ElectionViewModelFactory(
             application,
-            getUpcomingElectionsUseCase
+            getUpcomingElectionsUseCase,
+            saveElectionUseCase,
+            getSavedElectionUseCase,
+            unfollowElectionUseCase
         )
     }
 

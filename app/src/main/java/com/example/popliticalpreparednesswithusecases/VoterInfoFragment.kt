@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.popliticalpreparednesswithusecases.databinding.FragmentVoterInfoBinding
+import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class VoterInfoFragment : Fragment() {
 
     private lateinit var fragmentVoterInfoBinding: FragmentVoterInfoBinding
+    private lateinit var viewModel: ElectionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,10 +26,32 @@ class VoterInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentVoterInfoBinding = FragmentVoterInfoBinding.bind(view)
-        val args: VoterInfoFragmentArgs by navArgs()
+        val args: VoterInfoFragmentArgs by this.navArgs()
         val election = args.selectedElection
-        if (election.id != "") fragmentVoterInfoBinding.infoFragmentTextView.text =
-            election.id
+
+        viewModel = (activity as MainActivity).viewModel
+
+        fragmentVoterInfoBinding.apply {
+            if (election.name != "") electionName.text =
+                election.name
+            electionDay.text =
+                election.electionDay ?: ""
+            followElectionButton.setOnClickListener {
+                viewModel.saveElection(election)
+                Snackbar.make(view, "Saved Successfully!", Snackbar.LENGTH_SHORT).show()
+            }
+            unfollowElectionButton.setOnClickListener {
+                viewModel.deleteElections(election)
+                Snackbar.make(view, "deleted Successfully", Snackbar.LENGTH_SHORT)
+                    .apply {
+                        setAction("Undo") {
+                            viewModel.saveElection(election)
+                        }
+                            .show()
+                    }
+            }
+        }
+
     }
 
 }

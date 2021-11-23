@@ -55,8 +55,6 @@ class RepresentativeAdapter :
                 officialName.text = representative.official.name
                 officialParty.text = representative.official.party
             }
-//            binding.electionNameTextView.text = election.name
-//            binding.electionDayTextView.text = election.electionDay
 
             binding.root.setOnClickListener {
                 onItemClickListener?.let {

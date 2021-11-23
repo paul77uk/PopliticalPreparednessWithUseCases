@@ -7,16 +7,25 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.example.popliticalpreparednesswithusecases.data.model.Election
 import com.example.popliticalpreparednesswithusecases.data.model.ElectionResponse
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
+import com.example.popliticalpreparednesswithusecases.domain.usecase.GetSavedElectionUseCase
 import com.example.popliticalpreparednesswithusecases.domain.usecase.GetUpcomingElectionsUseCase
+import com.example.popliticalpreparednesswithusecases.domain.usecase.SaveElectionUseCase
+import com.example.popliticalpreparednesswithusecases.domain.usecase.UnfollowElectionUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ElectionViewModel(
     private val app: Application,
-    private val getUpcomingElectionsUseCase: GetUpcomingElectionsUseCase
+    private val getUpcomingElectionsUseCase: GetUpcomingElectionsUseCase,
+    private val saveElectionUseCase: SaveElectionUseCase,
+    private val getSavedElectionUseCase: GetSavedElectionUseCase,
+    private val unfollowElectionUseCase: UnfollowElectionUseCase
 ) : AndroidViewModel(app) {
 
     val elections: MutableLiveData<Resource<ElectionResponse>> = MutableLiveData()
@@ -62,6 +71,21 @@ class ElectionViewModel(
             }
         }
         return false
+    }
+
+    // local data
+    fun saveElection(election: Election) = viewModelScope.launch {
+        saveElectionUseCase.execute(election)
+    }
+
+    fun getSavedElections() = liveData {
+        getSavedElectionUseCase.execute().collect {
+            emit(it)
+        }
+    }
+
+    fun deleteElections(election: Election) = viewModelScope.launch {
+        unfollowElectionUseCase.execute(election)
     }
 
 }

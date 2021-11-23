@@ -2,8 +2,7 @@ package com.example.popliticalpreparednesswithusecases.presentation.di
 
 import com.example.popliticalpreparednesswithusecases.domain.repository.ElectionsRepository
 import com.example.popliticalpreparednesswithusecases.domain.repository.RepresentativeRepository
-import com.example.popliticalpreparednesswithusecases.domain.usecase.GetSearchedRepresentativeUseCase
-import com.example.popliticalpreparednesswithusecases.domain.usecase.GetUpcomingElectionsUseCase
+import com.example.popliticalpreparednesswithusecases.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +27,30 @@ class UseCaseModule {
         representativeRepository: RepresentativeRepository
     ) : GetSearchedRepresentativeUseCase {
         return GetSearchedRepresentativeUseCase(representativeRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSaveElectionUseCase(
+        electionsRepository: ElectionsRepository
+    ) : SaveElectionUseCase {
+        return SaveElectionUseCase(electionsRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetSavedElectionUseCase(
+        electionsRepository: ElectionsRepository
+    ) : GetSavedElectionUseCase {
+        return GetSavedElectionUseCase(electionsRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDeleteSavedElectionUseCase(
+        electionsRepository: ElectionsRepository
+    ) : UnfollowElectionUseCase {
+        return UnfollowElectionUseCase(electionsRepository)
     }
 
 }

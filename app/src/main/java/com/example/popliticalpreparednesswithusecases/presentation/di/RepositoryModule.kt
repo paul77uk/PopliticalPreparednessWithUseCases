@@ -2,6 +2,7 @@ package com.example.popliticalpreparednesswithusecases.presentation.di
 
 import com.example.popliticalpreparednesswithusecases.data.repository.ElectionRepositoryImpl
 import com.example.popliticalpreparednesswithusecases.data.repository.RepresentativeRepositoryImpl
+import com.example.popliticalpreparednesswithusecases.data.repository.datasource.ElectionLocalDataSource
 import com.example.popliticalpreparednesswithusecases.data.repository.datasource.ElectionRemoteDataSource
 import com.example.popliticalpreparednesswithusecases.data.repository.datasource.RepresentativeRemoteDataSource
 import com.example.popliticalpreparednesswithusecases.domain.repository.ElectionsRepository
@@ -19,9 +20,10 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideElectionRepository(
-        electionRemoteDataSource: ElectionRemoteDataSource
+        electionRemoteDataSource: ElectionRemoteDataSource,
+        electionLocalDataSource: ElectionLocalDataSource
     ): ElectionsRepository {
-        return ElectionRepositoryImpl(electionRemoteDataSource)
+        return ElectionRepositoryImpl(electionRemoteDataSource, electionLocalDataSource)
     }
 
     @Singleton

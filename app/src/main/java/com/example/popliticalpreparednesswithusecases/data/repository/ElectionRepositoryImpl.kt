@@ -2,6 +2,7 @@ package com.example.popliticalpreparednesswithusecases.data.repository
 
 import com.example.popliticalpreparednesswithusecases.data.model.Election
 import com.example.popliticalpreparednesswithusecases.data.model.ElectionResponse
+import com.example.popliticalpreparednesswithusecases.data.repository.datasource.ElectionLocalDataSource
 import com.example.popliticalpreparednesswithusecases.data.repository.datasource.ElectionRemoteDataSource
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
 import com.example.popliticalpreparednesswithusecases.domain.repository.ElectionsRepository
@@ -9,7 +10,8 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 class ElectionRepositoryImpl(
-    private val electionRemoteDataSource: ElectionRemoteDataSource
+    private val electionRemoteDataSource: ElectionRemoteDataSource,
+    private val electionLocalDataSource: ElectionLocalDataSource
 ): ElectionsRepository {
 
     override suspend fun getUpcomingElections(): Resource<ElectionResponse> {
@@ -26,15 +28,15 @@ class ElectionRepositoryImpl(
     }
 
     override suspend fun saveElection(election: Election) {
-        TODO("Not yet implemented")
+        electionLocalDataSource.saveElectionToDB(election)
     }
 
     override suspend fun unfollowElection(election: Election) {
-        TODO("Not yet implemented")
+        electionLocalDataSource.deleteElectionsFromDB(election)
     }
 
     override fun getSavedElection(): Flow<List<Election>> {
-        TODO("Not yet implemented")
+        return electionLocalDataSource.getSavedElections()
     }
 
 }

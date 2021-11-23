@@ -9,6 +9,11 @@
     <string name="address_line_2_hint">Address Line 2</string>
     <string name="zip_hint">Zip</string>
     <string name="official_s_image_content_description">Official\'s image</string>
+    <string name="election_information">Election Information</string>
+    <string name="voting_locations">Voting Locations</string>
+    <string name="ballot_information">Ballot Information</string>
+    <string name="follow_election">Follow Election</string>
+    <string name="unfollow_election">Unfollow Election</string>
 
     <string-array name="planets_array">
         <item>Mercury</item>
