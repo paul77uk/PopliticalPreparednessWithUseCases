@@ -17,7 +17,6 @@ class ElectionFragment : Fragment() {
 
     private lateinit var viewModel: ElectionViewModel
     private lateinit var electionAdapter: ElectionAdapter
-    private lateinit var savedElectionAdapter: ElectionAdapter
     private lateinit var fragmentElectionBinding: FragmentElectionBinding
 
     override fun onCreateView(
@@ -33,7 +32,6 @@ class ElectionFragment : Fragment() {
         fragmentElectionBinding = FragmentElectionBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
         electionAdapter = (activity as MainActivity).electionAdapter
-        savedElectionAdapter = (activity as MainActivity).electionAdapter
         electionAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("selected_election", it)
@@ -43,7 +41,7 @@ class ElectionFragment : Fragment() {
                 bundle
             )
         }
-        savedElectionAdapter.setOnItemClickListener {
+        electionAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("selected_election", it)
             }
@@ -54,7 +52,7 @@ class ElectionFragment : Fragment() {
         }
 
         viewModel.getSavedElections().observe(viewLifecycleOwner, {
-            savedElectionAdapter.differ.submitList(it)
+            electionAdapter.differ.submitList(it)
         })
 
         initRecycleView()
@@ -98,7 +96,7 @@ class ElectionFragment : Fragment() {
 
     private fun initSavedElectionRecycleView() {
         fragmentElectionBinding.savedElectionsRecyclerView.apply {
-            adapter = savedElectionAdapter
+            adapter = electionAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }

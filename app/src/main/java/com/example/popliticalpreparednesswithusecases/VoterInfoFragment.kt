@@ -1,5 +1,7 @@
 package com.example.popliticalpreparednesswithusecases
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,10 +38,23 @@ class VoterInfoFragment : Fragment() {
                 election.name
             electionDay.text =
                 election.electionDay ?: ""
+
+            votingLocations.setOnClickListener {
+//                viewModel.getVoterInfo(election.id.toString())
+                val openURL = Intent(Intent.ACTION_VIEW)
+                openURL.data = Uri.parse("https://www.tutorialkart.com/")
+                startActivity(openURL)
+            }
+
+            ballotInfo.setOnClickListener {
+
+            }
+
             followElectionButton.setOnClickListener {
                 viewModel.saveElection(election)
                 Snackbar.make(view, "Saved Successfully!", Snackbar.LENGTH_SHORT).show()
             }
+
             unfollowElectionButton.setOnClickListener {
                 viewModel.deleteElections(election)
                 Snackbar.make(view, "deleted Successfully", Snackbar.LENGTH_SHORT)

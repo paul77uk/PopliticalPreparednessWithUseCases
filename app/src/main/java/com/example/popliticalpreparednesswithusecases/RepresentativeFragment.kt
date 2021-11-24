@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.popliticalpreparednesswithusecases.data.model.Representative
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
 import com.example.popliticalpreparednesswithusecases.databinding.RepresentativeFragmentBinding
-import com.example.popliticalpreparednesswithusecases.presentation.adapters.RepresentativeAdapter
+import com.example.popliticalpreparednesswithusecases.presentation.adapters.RepresentativeListAdapter
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.RepresentativeViewModel
 
 class RepresentativeFragment : Fragment() {
 
     private lateinit var viewModel: RepresentativeViewModel
-    private lateinit var representativeAdapter: RepresentativeAdapter
+    private lateinit var representativeListAdapter: RepresentativeListAdapter
 
     private lateinit var fragmentRepresentativeBinding: RepresentativeFragmentBinding
 
@@ -31,7 +32,7 @@ class RepresentativeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentRepresentativeBinding = RepresentativeFragmentBinding.bind(view)
         viewModel = (activity as MainActivity).representativeViewModel
-        representativeAdapter = (activity as MainActivity).representativeAdapter
+        representativeListAdapter = (activity as MainActivity).representativeListAdapter
 
         initRecyclerView()
         displayRepresentativesFromFormAddress()
@@ -40,7 +41,7 @@ class RepresentativeFragment : Fragment() {
 
     private fun initRecyclerView() {
         fragmentRepresentativeBinding.representativesRecyclerView.apply {
-            adapter = representativeAdapter
+            adapter = representativeListAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }
@@ -52,7 +53,7 @@ class RepresentativeFragment : Fragment() {
                 is Resource.Success -> {
                     hideProgressbar()
                     response.data?.let {
-                        representativeAdapter.differ.submitList(it.representatives.toList())
+                        representativeListAdapter.submitList(it)
 //                        electionAdapter.differ.submitList(it.elections.toList())
                     }
                 }

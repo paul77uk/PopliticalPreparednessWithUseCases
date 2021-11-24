@@ -10,12 +10,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.popliticalpreparednesswithusecases.data.model.Election
+import com.example.popliticalpreparednesswithusecases.data.model.ElectionAdministrationBody
 import com.example.popliticalpreparednesswithusecases.data.model.ElectionResponse
+import com.example.popliticalpreparednesswithusecases.data.model.VoterInfoResponse
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
-import com.example.popliticalpreparednesswithusecases.domain.usecase.GetSavedElectionUseCase
-import com.example.popliticalpreparednesswithusecases.domain.usecase.GetUpcomingElectionsUseCase
-import com.example.popliticalpreparednesswithusecases.domain.usecase.SaveElectionUseCase
-import com.example.popliticalpreparednesswithusecases.domain.usecase.UnfollowElectionUseCase
+import com.example.popliticalpreparednesswithusecases.domain.usecase.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -25,7 +24,7 @@ class ElectionViewModel(
     private val getUpcomingElectionsUseCase: GetUpcomingElectionsUseCase,
     private val saveElectionUseCase: SaveElectionUseCase,
     private val getSavedElectionUseCase: GetSavedElectionUseCase,
-    private val unfollowElectionUseCase: UnfollowElectionUseCase
+    private val unfollowElectionUseCase: UnfollowElectionUseCase,
 ) : AndroidViewModel(app) {
 
     val elections: MutableLiveData<Resource<ElectionResponse>> = MutableLiveData()
@@ -87,5 +86,19 @@ class ElectionViewModel(
     fun deleteElections(election: Election) = viewModelScope.launch {
         unfollowElectionUseCase.execute(election)
     }
+
+//    fun getVoterInfo(electionId: String) = viewModelScope.launch(Dispatchers.IO) {
+//        voterInfo.postValue(Resource.Loading())
+//        try {
+//            if (isNetworkAvailable(app)) {
+//                val apiResult = getVoterInfoUseCase.execute()
+//                voterInfo.postValue(apiResult)
+//            } else {
+//                voterInfo.postValue(Resource.Error("Internet is not available"))
+//            }
+//        } catch (e: Exception) {
+//            voterInfo.postValue(Resource.Error(e.message.toString()))
+//        }
+//    }
 
 }
