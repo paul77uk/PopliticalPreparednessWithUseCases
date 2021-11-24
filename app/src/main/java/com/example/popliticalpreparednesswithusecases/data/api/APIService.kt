@@ -10,7 +10,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 const val MY_KEY="AIzaSyDkg-YrAFUANAgMZKUX3GBIqBG4KOHj-nw"
-const val MY_URL="https://www.googleapis.com/civicinfo/v2/"
 
 interface APIService {
 
