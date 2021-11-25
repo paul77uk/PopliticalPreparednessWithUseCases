@@ -1,5 +1,6 @@
 package com.example.popliticalpreparednesswithusecases
 
+import com.example.popliticalpreparednesswithusecases.presentation.adapters.RepresentativeAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,16 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.popliticalpreparednesswithusecases.data.model.Representative
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
 import com.example.popliticalpreparednesswithusecases.databinding.RepresentativeFragmentBinding
-import com.example.popliticalpreparednesswithusecases.presentation.adapters.RepresentativeListAdapter
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.RepresentativeViewModel
 
 class RepresentativeFragment : Fragment() {
 
     private lateinit var viewModel: RepresentativeViewModel
-    private lateinit var representativeListAdapter: RepresentativeListAdapter
+    private lateinit var representativeAdapter: RepresentativeAdapter
 
     private lateinit var fragmentRepresentativeBinding: RepresentativeFragmentBinding
 
@@ -32,7 +31,7 @@ class RepresentativeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentRepresentativeBinding = RepresentativeFragmentBinding.bind(view)
         viewModel = (activity as MainActivity).representativeViewModel
-        representativeListAdapter = (activity as MainActivity).representativeListAdapter
+        representativeAdapter = (activity as MainActivity).representativeAdapter
 
         initRecyclerView()
         displayRepresentativesFromFormAddress()
@@ -41,7 +40,7 @@ class RepresentativeFragment : Fragment() {
 
     private fun initRecyclerView() {
         fragmentRepresentativeBinding.representativesRecyclerView.apply {
-            adapter = representativeListAdapter
+            adapter = representativeAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }
@@ -53,7 +52,7 @@ class RepresentativeFragment : Fragment() {
                 is Resource.Success -> {
                     hideProgressbar()
                     response.data?.let {
-                        representativeListAdapter.submitList(it)
+                        representativeAdapter.differ.submitList(it.offices)
 //                        electionAdapter.differ.submitList(it.elections.toList())
                     }
                 }

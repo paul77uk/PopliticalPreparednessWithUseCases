@@ -1,5 +1,6 @@
 package com.example.popliticalpreparednesswithusecases
 
+import com.example.popliticalpreparednesswithusecases.presentation.adapters.RepresentativeAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -7,7 +8,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.example.popliticalpreparednesswithusecases.presentation.adapters.ElectionAdapter
-import com.example.popliticalpreparednesswithusecases.presentation.adapters.RepresentativeListAdapter
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModel
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModelFactory
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.RepresentativeViewModel
@@ -20,12 +20,18 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: ElectionViewModelFactory
+
     @Inject
     lateinit var representativeFactory: RepresentativeViewModelFactory
+
     @Inject
     lateinit var electionAdapter: ElectionAdapter
+
     @Inject
-    lateinit var representativeListAdapter: RepresentativeListAdapter
+    lateinit var savedElectionAdapter: ElectionAdapter
+
+    @Inject
+    lateinit var representativeAdapter: RepresentativeAdapter
 
     lateinit var viewModel: ElectionViewModel
     lateinit var representativeViewModel: RepresentativeViewModel
