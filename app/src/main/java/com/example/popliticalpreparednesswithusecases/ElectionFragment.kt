@@ -43,7 +43,7 @@ class ElectionFragment : Fragment() {
                 bundle
             )
         }
-        electionAdapter.setOnItemClickListener {
+        savedElectionAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("selected_election", it)
             }
