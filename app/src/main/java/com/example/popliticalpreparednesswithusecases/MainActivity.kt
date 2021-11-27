@@ -8,10 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.example.popliticalpreparednesswithusecases.presentation.adapters.ElectionAdapter
-import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModel
-import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModelFactory
-import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.RepresentativeViewModel
-import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.RepresentativeViewModelFactory
+import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var representativeFactory: RepresentativeViewModelFactory
 
     @Inject
+    lateinit var voterInfoViewModelFactory: VoterInfoViewModelFactory
+
+    @Inject
     lateinit var electionAdapter: ElectionAdapter
 
     @Inject
@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: ElectionViewModel
     lateinit var representativeViewModel: RepresentativeViewModel
+    lateinit var voterInfoViewModel: VoterInfoViewModel
+
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +55,9 @@ class MainActivity : AppCompatActivity() {
 
         representativeViewModel = ViewModelProvider(this, representativeFactory)
             .get(RepresentativeViewModel::class.java)
+
+        voterInfoViewModel = ViewModelProvider(this, voterInfoViewModelFactory)
+        .get(VoterInfoViewModel::class.java)
     }
 
     /**

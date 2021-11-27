@@ -2,11 +2,14 @@ package com.example.popliticalpreparednesswithusecases.presentation.di
 
 import com.example.popliticalpreparednesswithusecases.data.repository.ElectionRepositoryImpl
 import com.example.popliticalpreparednesswithusecases.data.repository.RepresentativeRepositoryImpl
+import com.example.popliticalpreparednesswithusecases.data.repository.VoterInfoRepositoryImpl
 import com.example.popliticalpreparednesswithusecases.data.repository.datasource.ElectionLocalDataSource
 import com.example.popliticalpreparednesswithusecases.data.repository.datasource.ElectionRemoteDataSource
 import com.example.popliticalpreparednesswithusecases.data.repository.datasource.RepresentativeRemoteDataSource
+import com.example.popliticalpreparednesswithusecases.data.repository.datasource.VoterInfoRemoteDataSource
 import com.example.popliticalpreparednesswithusecases.domain.repository.ElectionsRepository
 import com.example.popliticalpreparednesswithusecases.domain.repository.RepresentativeRepository
+import com.example.popliticalpreparednesswithusecases.domain.repository.VoterInfoRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,6 +35,14 @@ class RepositoryModule {
         representativeRemoteDataSource: RepresentativeRemoteDataSource
     ): RepresentativeRepository {
         return RepresentativeRepositoryImpl(representativeRemoteDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideVoterInfoRepository(
+        voterInfoRemoteDataSource: VoterInfoRemoteDataSource
+    ): VoterInfoRepository {
+        return VoterInfoRepositoryImpl(voterInfoRemoteDataSource)
     }
 
 }

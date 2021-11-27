@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.popliticalpreparednesswithusecases.domain.usecase.*
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModelFactory
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.RepresentativeViewModelFactory
+import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.VoterInfoViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,16 +20,12 @@ class FactoryModule {
     fun provideElectionViewModelFactory(
         application: Application,
         getUpcomingElectionsUseCase: GetUpcomingElectionsUseCase,
-        saveElectionUseCase: SaveElectionUseCase,
         getSavedElectionUseCase: GetSavedElectionUseCase,
-        unfollowElectionUseCase: UnfollowElectionUseCase
     ): ElectionViewModelFactory {
         return ElectionViewModelFactory(
             application,
             getUpcomingElectionsUseCase,
-            saveElectionUseCase,
             getSavedElectionUseCase,
-            unfollowElectionUseCase
         )
     }
 
@@ -41,6 +38,22 @@ class FactoryModule {
         return RepresentativeViewModelFactory(
             application,
             getSearchedRepresentativeUseCase
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideVoterInfoViewModelFactory(
+        application: Application,
+        getVoterInfoUseCase: GetVoterInfoUseCase,
+        saveElectionUseCase: SaveElectionUseCase,
+        unfollowElectionUseCase: UnfollowElectionUseCase
+    ): VoterInfoViewModelFactory {
+        return VoterInfoViewModelFactory(
+            application,
+            getVoterInfoUseCase,
+            saveElectionUseCase,
+            unfollowElectionUseCase
         )
     }
 

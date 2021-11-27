@@ -17,12 +17,12 @@ interface APIService {
         key: String = MY_KEY
     ): Response<ElectionResponse>
 
-    @GET("voteInfo")
+    @GET("voterinfo")
     suspend fun getVoterInfo(
         @Query("key")
         key: String = MY_KEY,
         @Query("address")
-        address: String = "1263 Pacific Ave. Kansas City",
+        address: String = "la",
         @Query("electionId")
         electionId: String
     ): Response<VoterInfoResponse>

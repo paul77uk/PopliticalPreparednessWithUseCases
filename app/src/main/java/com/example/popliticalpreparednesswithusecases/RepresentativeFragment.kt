@@ -53,7 +53,6 @@ class RepresentativeFragment : Fragment() {
                     hideProgressbar()
                     response.data?.let {
                         representativeAdapter.differ.submitList(it.offices)
-//                        electionAdapter.differ.submitList(it.elections.toList())
                     }
                 }
                 is Resource.Error -> {
@@ -81,49 +80,11 @@ class RepresentativeFragment : Fragment() {
     private fun hideProgressbar() {
 //        fragmentElectionBinding.progressBar.visibility = View.GONE
     }
-//
-//    private fun setSearchView() {
-//        fragmentRepresentativeBinding.searchView.setOnQueryTextListener(object :
-//            SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(p0: String?): Boolean {
-//                viewModel.getRepresentatives(p0.toString())
-//                getRepresentatives()
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(p0: String?): Boolean {
-//                MainScope().launch {
-//                    delay(2000)
-//                    viewModel.getRepresentatives(p0.toString())
-//                    getRepresentatives()
-//                }
-//                return false
-//            }
-//
-//        })
-
-//        fragmentRepresentativeBinding.searchView.setOnCloseListener(
-//            object : SearchView.OnCloseListener {
-//                override fun onClose(): Boolean {
-//                    getRepresentatives()
-//                    return false
-//                }
-//            }
-//        )
-//    }
 
     fun displayRepresentativesFromFormAddress() {
 
         fragmentRepresentativeBinding.apply {
             button.setOnClickListener {
-//                val addressLine2 =
-//                    if (!addressLine2EditText.text.isNullOrEmpty()) " ${addressLine2EditText.text}" else ""
-//                val city =
-//                    if (!cityEditText.text.isNullOrEmpty()) " ${cityEditText.text}" else ""
-//                val state =
-//                    if (!stateEditText.text.isNullOrEmpty()) " ${stateEditText.text}" else ""
-//                val zip =
-//                    if (!zipEditText.text.isNullOrEmpty()) " ${zipEditText.text}" else ""
                 val address =
                     "${addressLine1EditText.text} ${addressLine2EditText.text} ${cityEditText.text} ${stateEditText.text} ${zipEditText.text}"
                 viewModel.getRepresentatives(address)

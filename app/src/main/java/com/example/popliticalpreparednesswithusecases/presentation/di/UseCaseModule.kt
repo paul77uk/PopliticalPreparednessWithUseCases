@@ -2,6 +2,7 @@ package com.example.popliticalpreparednesswithusecases.presentation.di
 
 import com.example.popliticalpreparednesswithusecases.domain.repository.ElectionsRepository
 import com.example.popliticalpreparednesswithusecases.domain.repository.RepresentativeRepository
+import com.example.popliticalpreparednesswithusecases.domain.repository.VoterInfoRepository
 import com.example.popliticalpreparednesswithusecases.domain.usecase.*
 import dagger.Module
 import dagger.Provides
@@ -51,6 +52,14 @@ class UseCaseModule {
         electionsRepository: ElectionsRepository
     ) : UnfollowElectionUseCase {
         return UnfollowElectionUseCase(electionsRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideVoterInfoUseCase(
+        voterInfoRepository: VoterInfoRepository
+    ) : GetVoterInfoUseCase {
+        return GetVoterInfoUseCase(voterInfoRepository)
     }
 
 }

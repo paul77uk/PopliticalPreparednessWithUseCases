@@ -4,21 +4,23 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.popliticalpreparednesswithusecases.domain.usecase.GetSavedElectionUseCase
-import com.example.popliticalpreparednesswithusecases.domain.usecase.GetUpcomingElectionsUseCase
+import com.example.popliticalpreparednesswithusecases.domain.usecase.GetVoterInfoUseCase
 import com.example.popliticalpreparednesswithusecases.domain.usecase.SaveElectionUseCase
 import com.example.popliticalpreparednesswithusecases.domain.usecase.UnfollowElectionUseCase
 
-class ElectionViewModelFactory(
+class VoterInfoViewModelFactory(
     private val app: Application,
-    private val getUpcomingElectionsUseCase: GetUpcomingElectionsUseCase,
-    private val getSavedElectionUseCase: GetSavedElectionUseCase,
-): ViewModelProvider.Factory {
+    private val getVoterInfoUseCase: GetVoterInfoUseCase,
+    private val saveElectionUseCase: SaveElectionUseCase,
+    private val unfollowElectionUseCase: UnfollowElectionUseCase
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return ElectionViewModel(
+        return VoterInfoViewModel(
             app,
-            getUpcomingElectionsUseCase,
-            getSavedElectionUseCase,
+            getVoterInfoUseCase,
+            saveElectionUseCase,
+            unfollowElectionUseCase
         ) as T
     }
 

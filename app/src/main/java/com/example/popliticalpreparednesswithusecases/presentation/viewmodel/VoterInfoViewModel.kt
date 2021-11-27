@@ -7,37 +7,37 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.popliticalpreparednesswithusecases.data.model.Election
-import com.example.popliticalpreparednesswithusecases.data.model.ElectionAdministrationBody
-import com.example.popliticalpreparednesswithusecases.data.model.ElectionResponse
 import com.example.popliticalpreparednesswithusecases.data.model.VoterInfoResponse
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
-import com.example.popliticalpreparednesswithusecases.domain.usecase.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
+import com.example.popliticalpreparednesswithusecases.domain.usecase.GetVoterInfoUseCase
+import com.example.popliticalpreparednesswithusecases.domain.usecase.SaveElectionUseCase
+import com.example.popliticalpreparednesswithusecases.domain.usecase.UnfollowElectionUseCase
 import kotlinx.coroutines.launch
 
-class ElectionViewModel(
+class VoterInfoViewModel(
     private val app: Application,
-    private val getUpcomingElectionsUseCase: GetUpcomingElectionsUseCase,
-    private val getSavedElectionUseCase: GetSavedElectionUseCase,
+    private val getVoterInfoUseCase: GetVoterInfoUseCase,
+    private val saveElectionUseCase: SaveElectionUseCase,
+    private val unfollowElectionUseCase: UnfollowElectionUseCase,
 ) : AndroidViewModel(app) {
 
-    val elections: MutableLiveData<Resource<ElectionResponse>> = MutableLiveData()
+    val voterInfo: MutableLiveData<Resource<VoterInfoResponse>> = MutableLiveData()
 
-    fun getElections() = viewModelScope.launch(Dispatchers.IO) {
-        elections.postValue(Resource.Loading())
+    fun getVoterInfo(
+        electionId: String
+    ) = viewModelScope.launch {
+        voterInfo.value = Resource.Loading()
         try {
             if (isNetworkAvailable(app)) {
-                val apiResult = getUpcomingElectionsUseCase.execute()
-                elections.postValue(apiResult)
+                val response = getVoterInfoUseCase.execute(electionId)
+                voterInfo.value = response
             } else {
-                elections.postValue(Resource.Error("Internet is not available"))
+                voterInfo.value = Resource.Error("No internet connection")
             }
         } catch (e: Exception) {
-            elections.postValue(Resource.Error(e.message.toString()))
+            voterInfo.value = Resource.Error(e.message.toString())
         }
     }
 
@@ -71,25 +71,12 @@ class ElectionViewModel(
     }
 
     // local data
-
-    fun getSavedElections() = liveData {
-        getSavedElectionUseCase.execute().collect {
-            emit(it)
-        }
+    fun saveElection(election: Election) = viewModelScope.launch {
+        saveElectionUseCase.execute(election)
     }
 
-//    fun getVoterInfo(electionId: String) = viewModelScope.launch(Dispatchers.IO) {
-//        voterInfo.postValue(Resource.Loading())
-//        try {
-//            if (isNetworkAvailable(app)) {
-//                val apiResult = getVoterInfoUseCase.execute()
-//                voterInfo.postValue(apiResult)
-//            } else {
-//                voterInfo.postValue(Resource.Error("Internet is not available"))
-//            }
-//        } catch (e: Exception) {
-//            voterInfo.postValue(Resource.Error(e.message.toString()))
-//        }
-//    }
+    fun deleteElections(election: Election) = viewModelScope.launch {
+        unfollowElectionUseCase.execute(election)
+    }
 
 }

@@ -3,8 +3,10 @@ package com.example.popliticalpreparednesswithusecases.presentation.di
 import com.example.popliticalpreparednesswithusecases.data.api.APIService
 import com.example.popliticalpreparednesswithusecases.data.repository.datasource.ElectionRemoteDataSource
 import com.example.popliticalpreparednesswithusecases.data.repository.datasource.RepresentativeRemoteDataSource
+import com.example.popliticalpreparednesswithusecases.data.repository.datasource.VoterInfoRemoteDataSource
 import com.example.popliticalpreparednesswithusecases.data.repository.datasourceimpl.ElectionRemoteDataSourceImpl
 import com.example.popliticalpreparednesswithusecases.data.repository.datasourceimpl.RepresentativeRemoteDataSourceImpl
+import com.example.popliticalpreparednesswithusecases.data.repository.datasourceimpl.VoterInfoRemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +27,12 @@ class RemoteDataModule {
     @Provides
     fun provideRepresentativeRemoteDataSource(apiService: APIService): RepresentativeRemoteDataSource {
         return RepresentativeRemoteDataSourceImpl(apiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideVoterInfoRemoteDataSource(apiService: APIService): VoterInfoRemoteDataSource {
+        return VoterInfoRemoteDataSourceImpl(apiService)
     }
 
 }
