@@ -9,8 +9,8 @@ import retrofit2.Response
 
 class VoterInfoRemoteDataSourceImpl(private val apiService: APIService): VoterInfoRemoteDataSource {
 
-    override suspend fun getVoterInfo(electionId: String): Response<VoterInfoResponse> {
-        return apiService.getVoterInfo(electionId = electionId)
+    override suspend fun getVoterInfo(electionId: String, address: String): Response<VoterInfoResponse> {
+        return apiService.getVoterInfo(electionId = electionId, address = address)
     }
 
 }

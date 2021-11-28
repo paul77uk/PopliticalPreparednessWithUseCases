@@ -5,6 +5,6 @@ import com.example.popliticalpreparednesswithusecases.data.util.Resource
 
 interface VoterInfoRepository {
 
-    suspend fun getVoterInfo(electionId: String): Resource<VoterInfoResponse>
+    suspend fun getVoterInfo(electionId: String, address: String): Resource<VoterInfoResponse>
 
 }

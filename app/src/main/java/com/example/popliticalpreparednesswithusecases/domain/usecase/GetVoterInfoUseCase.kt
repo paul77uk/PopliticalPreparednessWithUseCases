@@ -6,8 +6,8 @@ import com.example.popliticalpreparednesswithusecases.domain.repository.VoterInf
 
 class GetVoterInfoUseCase(private val voterInfoRepository: VoterInfoRepository) {
 
-    suspend fun execute(electionId: String): Resource<VoterInfoResponse> {
-        return voterInfoRepository.getVoterInfo(electionId)
+    suspend fun execute(electionId: String, address: String): Resource<VoterInfoResponse> {
+        return voterInfoRepository.getVoterInfo(electionId, address)
     }
 
 }

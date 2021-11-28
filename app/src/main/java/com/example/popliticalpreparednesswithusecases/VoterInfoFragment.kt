@@ -9,16 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
-import com.example.popliticalpreparednesswithusecases.data.model.Election
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
 import com.example.popliticalpreparednesswithusecases.databinding.FragmentVoterInfoBinding
-import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.ElectionViewModel
 import com.example.popliticalpreparednesswithusecases.presentation.viewmodel.VoterInfoViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
 
 class VoterInfoFragment : Fragment() {
 
@@ -51,12 +46,17 @@ class VoterInfoFragment : Fragment() {
                 election.electionDay ?: ""
             Log.i("TAG", "${election.id}")
 
-            Log.i("TAG5", election.ocdDivisionId.substringAfter("state:","la"))
+            Log.i("TAG5", election.ocdDivisionId.substringAfter("state:", "ks"))
+
+            viewModel.getVoterInfo(
+                election.id.toString(),
+                election.ocdDivisionId.substringAfter("state:", "ks")
+            )
 
             votingLocations.setOnClickListener {
-                Log.i("TAG5", election.ocdDivisionId.substringAfter("state:","la"))
-                viewModel.getVoterInfo(election.id.toString())
-                getVoterInfo()
+                Log.i("TAG5", election.ocdDivisionId.substringAfter("state:", "ks"))
+
+                getVoterInfo("votingLocation")
                 Log.i("Tag3", "${viewModel.voterInfo.value}")
 
 //                viewModel.voterInfo.observe(viewLifecycleOwner, Observer {
@@ -70,7 +70,7 @@ class VoterInfoFragment : Fragment() {
             }
 
             ballotInfo.setOnClickListener {
-
+                getVoterInfo("ballotInfo")
             }
 
             followElectionButton.setOnClickListener {
@@ -91,10 +91,9 @@ class VoterInfoFragment : Fragment() {
         }
 
 
+    }
 
-        }
-
-    fun getVoterInfo() {
+    fun getVoterInfo(url: String) {
 
         viewModel.voterInfo.observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -103,7 +102,12 @@ class VoterInfoFragment : Fragment() {
                     response.data?.let {
                         val openURL = Intent(Intent.ACTION_VIEW)
                         openURL.data =
-                            Uri.parse(it.state[0].electionAdministrationBody.electionInfoUrl)
+                            Uri.parse(
+                                if (url == "votingLocation")
+                                    it.state[0].electionAdministrationBody.votingLocationFinderUrl
+                                else
+                                    it.state[0].electionAdministrationBody.ballotInfoUrl
+                            )
                         startActivity(openURL)
 
 //                        representativeAdapter.differ.submitList(it.offices)
@@ -128,4 +132,4 @@ class VoterInfoFragment : Fragment() {
     }
 
 
-    }
+}

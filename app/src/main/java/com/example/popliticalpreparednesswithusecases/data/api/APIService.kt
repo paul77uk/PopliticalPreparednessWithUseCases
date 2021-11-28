@@ -22,7 +22,7 @@ interface APIService {
         @Query("key")
         key: String = MY_KEY,
         @Query("address")
-        address: String = "la",
+        address: String = "ks",
         @Query("electionId")
         electionId: String
     ): Response<VoterInfoResponse>

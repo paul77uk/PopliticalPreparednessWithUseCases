@@ -26,12 +26,13 @@ class VoterInfoViewModel(
     val voterInfo: MutableLiveData<Resource<VoterInfoResponse>> = MutableLiveData()
 
     fun getVoterInfo(
-        electionId: String
+        electionId: String,
+        address: String
     ) = viewModelScope.launch {
         voterInfo.value = Resource.Loading()
         try {
             if (isNetworkAvailable(app)) {
-                val response = getVoterInfoUseCase.execute(electionId)
+                val response = getVoterInfoUseCase.execute(electionId, address)
                 voterInfo.value = response
             } else {
                 voterInfo.value = Resource.Error("No internet connection")

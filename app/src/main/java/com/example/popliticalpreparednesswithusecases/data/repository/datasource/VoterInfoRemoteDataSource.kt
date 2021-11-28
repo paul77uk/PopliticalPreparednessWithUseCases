@@ -5,6 +5,6 @@ import retrofit2.Response
 
 interface VoterInfoRemoteDataSource {
 
-    suspend fun getVoterInfo(electionId: String): Response<VoterInfoResponse>
+    suspend fun getVoterInfo(electionId: String, address: String): Response<VoterInfoResponse>
 
 }

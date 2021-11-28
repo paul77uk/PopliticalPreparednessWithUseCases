@@ -18,8 +18,8 @@ class VoterInfoRepositoryImpl(private val voterInfoRemoteDataSource: VoterInfoRe
         return Resource.Error(response.message())
     }
 
-    override suspend fun getVoterInfo(electionId: String): Resource<VoterInfoResponse> {
-        return responseToResource(voterInfoRemoteDataSource.getVoterInfo(electionId))
+    override suspend fun getVoterInfo(electionId: String, address: String): Resource<VoterInfoResponse> {
+        return responseToResource(voterInfoRemoteDataSource.getVoterInfo(electionId, address))
     }
 
 }
