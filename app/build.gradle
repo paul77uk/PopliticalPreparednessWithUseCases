@@ -9,6 +9,11 @@ plugins {
 android {
     compileSdk 31
 
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "com.example.popliticalpreparednesswithusecases"
         minSdk 26
@@ -34,9 +39,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding = true
-    }
+
 }
 
 dependencies {
@@ -45,6 +48,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
 
     // gson
     implementation 'com.google.code.gson:gson:2.8.9'

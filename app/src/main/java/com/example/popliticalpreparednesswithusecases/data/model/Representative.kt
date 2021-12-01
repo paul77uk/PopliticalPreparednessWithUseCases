@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Representative (
         @SerializedName("official")
-        val official: Official,
+        var official: Official,
         @SerializedName("office")
-        val office: Office
+        var office: Office
 )

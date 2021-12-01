@@ -1,5 +1,6 @@
 package com.example.popliticalpreparednesswithusecases.data.repository
 
+import com.example.popliticalpreparednesswithusecases.data.model.ElectionResponse
 import com.example.popliticalpreparednesswithusecases.data.model.RepresentativeResponse
 import com.example.popliticalpreparednesswithusecases.data.repository.datasource.RepresentativeRemoteDataSource
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
@@ -8,11 +9,11 @@ import retrofit2.Response
 
 class RepresentativeRepositoryImpl(
     private val representativeRemoteDataSource: RepresentativeRemoteDataSource
-) : RepresentativeRepository {
+) : RepresentativeRepository{
 
-    private fun responseToResource(response: Response<RepresentativeResponse>): Resource<RepresentativeResponse> {
+    private fun responseToResource(response: Response<RepresentativeResponse>):Resource<RepresentativeResponse>{
         if (response.isSuccessful) {
-            response.body()?.let { result ->
+            response.body()?.let { result->
                 return Resource.Success(result)
             }
         }

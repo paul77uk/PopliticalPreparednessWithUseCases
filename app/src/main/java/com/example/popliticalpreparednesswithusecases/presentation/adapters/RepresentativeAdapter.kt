@@ -5,24 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.popliticalpreparednesswithusecases.data.model.Office
+import com.example.popliticalpreparednesswithusecases.data.model.Representative
 import com.example.popliticalpreparednesswithusecases.databinding.RepresentativeListItemBinding
 
 class RepresentativeAdapter :
     RecyclerView.Adapter<RepresentativeAdapter.RepresentativeViewHolder>() {
 
-    private val callback = object : DiffUtil.ItemCallback<Office>() {
+    private val callback = object : DiffUtil.ItemCallback<Representative>() {
 
         override fun areItemsTheSame(
-            oldItem: Office,
-            newItem: Office
+            oldItem: Representative,
+            newItem: Representative
         ): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.office == newItem.office
         }
 
         override fun areContentsTheSame(
-            oldItem: Office,
-            newItem: Office
+            oldItem: Representative,
+            newItem: Representative
         ): Boolean {
             return oldItem == newItem
         }
@@ -49,11 +49,11 @@ class RepresentativeAdapter :
     inner class RepresentativeViewHolder(val binding: RepresentativeListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(representative: Office) {
+        fun bind(representative: Representative) {
             binding.apply {
-                office.text = representative.name
-//                officialName.text = representative.official.name
-//                officialParty.text = representative.official.party
+                office.text = representative.office.name
+                officialName.text = representative.official.name
+                officialParty.text = representative.official.party
             }
 
             binding.root.setOnClickListener {
@@ -65,9 +65,9 @@ class RepresentativeAdapter :
 
     }
 
-    private var onItemClickListener: ((Office) -> Unit)? = null
+    private var onItemClickListener: ((Representative) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Office) -> Unit) {
+    fun setOnItemClickListener(listener: (Representative) -> Unit) {
         onItemClickListener = listener
     }
 

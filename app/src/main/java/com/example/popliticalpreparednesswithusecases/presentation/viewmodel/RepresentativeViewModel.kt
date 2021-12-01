@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.popliticalpreparednesswithusecases.data.model.Representative
 import com.example.popliticalpreparednesswithusecases.data.model.RepresentativeResponse
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
 import com.example.popliticalpreparednesswithusecases.domain.usecase.GetSearchedRepresentativeUseCase
@@ -20,6 +21,7 @@ class RepresentativeViewModel(
 
     // TODO: Implement the ViewModel
     val representative: MutableLiveData<Resource<RepresentativeResponse>> = MutableLiveData()
+    val representativeItem: MutableLiveData<List<Representative>> = MutableLiveData()
 
     fun getRepresentatives(
         address: String
@@ -29,6 +31,12 @@ class RepresentativeViewModel(
             if (isNetworkAvailable(app)) {
                 val response = getSearchedRepresentativeUseCase.execute(address)
                 representative.postValue(response)
+                for (i in 0..(response.data?.offices?.size!!)) {
+                    representativeItem.value?.get(i)?.office  = response.data.offices[i]
+                }
+                for (i in 0..(response.data.officials.size)) {
+                    representativeItem.value?.get(i)?.official  = response.data.officials[i]
+                }
             } else {
                 representative.postValue(Resource.Error("No internet connection"))
             }
