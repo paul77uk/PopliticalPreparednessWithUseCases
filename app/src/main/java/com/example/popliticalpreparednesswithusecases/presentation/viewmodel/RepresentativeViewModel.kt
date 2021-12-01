@@ -27,7 +27,7 @@ class RepresentativeViewModel(
         address: String
     ) = viewModelScope.launch {
         representative.postValue(Resource.Loading())
-        try {
+        try {, 
             if (isNetworkAvailable(app)) {
                 val response = getSearchedRepresentativeUseCase.execute(address)
                 representative.postValue(response)
