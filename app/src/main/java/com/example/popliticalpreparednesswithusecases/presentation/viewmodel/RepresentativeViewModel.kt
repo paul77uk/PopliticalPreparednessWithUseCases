@@ -8,6 +8,8 @@ import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.popliticalpreparednesswithusecases.data.model.Office
+import com.example.popliticalpreparednesswithusecases.data.model.Official
 import com.example.popliticalpreparednesswithusecases.data.model.Representative
 import com.example.popliticalpreparednesswithusecases.data.model.RepresentativeResponse
 import com.example.popliticalpreparednesswithusecases.data.util.Resource
@@ -22,21 +24,58 @@ class RepresentativeViewModel(
     // TODO: Implement the ViewModel
     val representative: MutableLiveData<Resource<RepresentativeResponse>> = MutableLiveData()
     val representativeItem: MutableLiveData<List<Representative>> = MutableLiveData()
+    val representativeString: MutableLiveData<List<String>> = MutableLiveData()
 
     fun getRepresentatives(
         address: String
     ) = viewModelScope.launch {
         representative.postValue(Resource.Loading())
-        try {, 
+        try {
             if (isNetworkAvailable(app)) {
                 val response = getSearchedRepresentativeUseCase.execute(address)
                 representative.postValue(response)
-                for (i in 0..(response.data?.offices?.size!!)) {
-                    representativeItem.value?.get(i)?.office  = response.data.offices[i]
+
+//                val list = mutableListOf<String>()
+//                representativeString.value?.let { list.addAll(it) }
+//                response.data?.offices?.get(0)?.let { list.add(it.name) }
+//                response.data?.offices?.get(1)?.let { list.add(it.name) }
+//                representativeString.value = list
+
+
+                val list2 = mutableListOf<Representative>()
+                for (i in 0..(response.data?.officials?.lastIndex!!)) {
+                    var office = Office("", mutableListOf())
+                    for (j in response.data.offices) {
+                        if (j.officialIndices.contains(i)) {
+                            office = j
+                        }
+                    }
+                    response.data.let {
+                        list2.add(
+                            Representative(
+                                Official(
+                                    name = it.officials[i].name,
+                                    party = it.officials[i].party
+                                ),
+                                Office(
+                                    name = office.name,
+                                    officialIndices = office.officialIndices
+                                )
+                            )
+                        )
+                    }
                 }
-                for (i in 0..(response.data.officials.size)) {
-                    representativeItem.value?.get(i)?.official  = response.data.officials[i]
-                }
+                representativeItem.value = list2
+
+//
+
+//                representativeString.value = response.data?.offices?.get(0)?.name!!
+//                for (i in 0..(response.data?.offices?.size!!)) {
+//                    representativeItem.value?.get(i)?.office  = response.data.offices[i]
+//                }
+//                for (i in 0..(response.data.officials.size)) {
+//                    representativeItem.value?.get(i)?.official  = response.data.officials[i]
+//                }
             } else {
                 representative.postValue(Resource.Error("No internet connection"))
             }

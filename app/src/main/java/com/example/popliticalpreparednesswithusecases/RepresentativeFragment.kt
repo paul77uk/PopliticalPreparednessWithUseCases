@@ -64,12 +64,24 @@ class RepresentativeFragment : Fragment() {
                                     Log.i("TAG2", response.data?.officials?.get(0)?.name!!)
 //                     Log.i("TAG3", viewModel.representativeItem.value?.get(0)?.official?.name!!)
                     hideProgressbar()
+                    viewModel.representativeString.value?.let { Log.i("TAG5", it[1]) }
+//                        for (i in 0..(response.data.offices.size)) {
+//                            viewModel.representativeItem.value?.get(i)?.office = response.data.offices[i]
+//                        }
+//                        for (i in 0..(response.data.officials.size)) {
+//                            viewModel.representativeItem.value?.get(i)?.official = response.data.officials[i]
+//                        }
                     viewModel.representativeItem.observe(viewLifecycleOwner, {
-                                       representativeAdapter.differ.submitList(it)
-                        Log.i("TAG", it[0].office.name)
-
-
+                        representativeAdapter.differ.submitList(it)
                     })
+
+//                    if (viewModel.representativeItem.value != null) {
+//                        Log.i("TAG", viewModel.representativeItem.value?.get(0)?.office?.name!!)
+//                        Log.i("TAG3", response.data.officials[0].name)
+//                    } else Log.i("TAG4", "null")
+
+
+
 //                     Log.i("TAG5", response.data.offices[0].name)
 //                    response.data?.let {
 //                        representativeAdapter.differ.submitList(it)
