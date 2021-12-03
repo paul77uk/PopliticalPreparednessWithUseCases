@@ -55,7 +55,8 @@ class RepresentativeViewModel(
                             Representative(
                                 Official(
                                     name = it.officials[i].name,
-                                    party = it.officials[i].party
+                                    party = it.officials[i].party,
+                                    photoUrl = it.officials[i].photoUrl
                                 ),
                                 Office(
                                     name = office.name,

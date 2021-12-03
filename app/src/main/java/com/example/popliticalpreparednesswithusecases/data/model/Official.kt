@@ -16,8 +16,8 @@ data class Official(
     var party: String,
 //    @SerializedName("phones")
 //    val phones: List<String>,
-//    @SerializedName("photoUrl")
-//    val photoUrl: String,
+    @SerializedName("photoUrl")
+    val photoUrl: String?,
 //    @SerializedName("urls")
 //    val urls: List<String>
 )

@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.popliticalpreparednesswithusecases.R
 import com.example.popliticalpreparednesswithusecases.data.model.Representative
 import com.example.popliticalpreparednesswithusecases.databinding.RepresentativeListItemBinding
 
@@ -54,6 +56,14 @@ class RepresentativeAdapter :
                 office.text = representative.office.name
                 officialName.text = representative.official.name
                 officialParty.text = representative.official.party
+
+                if (representative.official.photoUrl != null) {
+                    Glide.with(image.context).
+                    load(representative.official.photoUrl)
+                        .placeholder(R.drawable.ic_profile)
+                        .circleCrop()
+                        .into(image)
+                } else image.setImageResource(R.drawable.ic_profile)
             }
 
             binding.root.setOnClickListener {

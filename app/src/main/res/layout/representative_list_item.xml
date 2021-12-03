@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_profile"
+            tools:srcCompat="@drawable/ic_profile"
             android:contentDescription="@string/official_s_image_content_description" />
 
         <TextView
