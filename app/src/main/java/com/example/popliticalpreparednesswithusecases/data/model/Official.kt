@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName
 data class Official(
 //    @SerializedName("address")
 //    val address: List<Address>,
-//    @SerializedName("channels")
-//    val channels: List<Channel>,
+    @SerializedName("channels")
+    val channels: List<Channel>?,
 //    @SerializedName("emails")
 //    val emails: List<String>,
     @SerializedName("name")
@@ -18,6 +18,6 @@ data class Official(
 //    val phones: List<String>,
     @SerializedName("photoUrl")
     val photoUrl: String?,
-//    @SerializedName("urls")
-//    val urls: List<String>
+    @SerializedName("urls")
+    val urls: List<String>
 )
