@@ -124,8 +124,8 @@ class RepresentativeAdapter :
 
     private var onItemClickListener: ((Representative) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Representative) -> Unit) {
-        onItemClickListener = listener
-    }
+//    fun setOnItemClickListener(listener: (Representative) -> Unit) {
+//        onItemClickListener = listener
+//    }
 
 }

@@ -117,7 +117,7 @@ class RepresentativeFragment : Fragment() {
     fun displayRepresentativesFromFormAddress() {
 
         fragmentRepresentativeBinding.apply {
-            button.setOnClickListener {
+            findRepresentativesButton.setOnClickListener {
                 val address =
                     "${addressLine1EditText.text} ${addressLine2EditText.text} ${cityEditText.text} ${stateEditText.text} ${zipEditText.text}"
                 viewModel.getRepresentatives(address)

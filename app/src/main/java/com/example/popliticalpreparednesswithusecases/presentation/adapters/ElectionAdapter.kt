@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popliticalpreparednesswithusecases.data.model.Election
 import com.example.popliticalpreparednesswithusecases.databinding.ElectionListItemBinding
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ElectionAdapter : RecyclerView.Adapter<ElectionAdapter.ElectionViewHolder>() {
 
@@ -43,8 +45,12 @@ class ElectionAdapter : RecyclerView.Adapter<ElectionAdapter.ElectionViewHolder>
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(election: Election) {
+            var date = LocalDate.parse(election.electionDay)
+            var formatter = DateTimeFormatter.ofPattern("EEEE d MMMM yyyy")
+            var formattedDate = date.format(formatter)
             binding.electionNameTextView.text = election.name
-            binding.electionDayTextView.text = election.electionDay
+            binding.electionDayTextView.text = formattedDate
+
 
             binding.root.setOnClickListener {
                 onItemClickListener?.let {
