@@ -24,7 +24,7 @@ class RepresentativeViewModel(
     // TODO: Implement the ViewModel
     val representative: MutableLiveData<Resource<RepresentativeResponse>> = MutableLiveData()
     val representativeItem: MutableLiveData<List<Representative>> = MutableLiveData()
-    val representativeString: MutableLiveData<List<String>> = MutableLiveData()
+//    val representativeString: MutableLiveData<List<String>> = MutableLiveData()
 
     fun getRepresentatives(
         address: String
