@@ -20,8 +20,8 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-        buildConfigField("String", "API_KEY", MY_KEY)
-        buildConfigField("String", "BASE_URL", MY_URL)
+//        buildConfigField("String", "API_KEY", MY_KEY)
+//        buildConfigField("String", "BASE_URL", MY_URL)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
