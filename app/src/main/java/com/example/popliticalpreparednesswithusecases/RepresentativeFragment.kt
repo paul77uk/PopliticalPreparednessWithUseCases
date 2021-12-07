@@ -54,6 +54,7 @@ class RepresentativeFragment : Fragment() {
         fragmentRepresentativeBinding.apply {
             findRepresentativesButton.setOnClickListener {
                 displayRepresentativesFromFormAddress()
+                hideKeyboard()
             }
             useMyLocationButton.setOnClickListener {
                 getLocation()
